@@ -1,4 +1,4 @@
-qfunction ft = controlbool(h)
+function ft = controlbool(h)
 %sensor B
 if h < 1
     B=0
