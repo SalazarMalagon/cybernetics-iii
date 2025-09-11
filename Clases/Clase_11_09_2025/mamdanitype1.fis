@@ -1,0 +1,40 @@
+fu[System]
+Name='mamdanitype1'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=3
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='servicio'
+Range=[0 10]
+NumMFs=3
+MF1='pobre':'zmf',[-0.075 2.5]
+MF2='bueno':'gaussmf',[1.5 5]
+MF3='excelente':'smf',[6 9]
+
+[Input2]
+Name='comida'
+Range=[0 10]
+NumMFs=2
+MF1='Maluca':'linzmf',[1 4]
+MF2='Deliciosa':'linsmf',[7 9]
+
+[Output1]
+Name='output1'
+Range=[0 30]
+NumMFs=3
+MF1='mezquino':'trimf',[5 7.7 10.4]
+MF2='promedio':'trimf',[10.4 13.1 15.8]
+MF3='generoso':'trimf',[15.8 18.5 21.5]
+
+[Rules]
+1 1, 1 (1) : 2
+2 0, 2 (1) : 1
+3 2, 3 (1) : 2

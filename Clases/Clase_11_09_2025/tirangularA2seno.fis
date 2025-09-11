@@ -1,0 +1,33 @@
+[System]
+Name='tirangularA2seno'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=3
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='X'
+Range=[-1.5 1.5]
+NumMFs=3
+MF1='negativo':'gaussmf',[0.171468567306901 -0.959265858873842]
+MF2='cero':'gaussmf',[0.0447815967044234 -0.00956878118317914]
+MF3='positivo':'gaussmf',[0.192308127517104 0.835869565217391]
+
+[Output1]
+Name='Y'
+Range=[-1.5 1.5]
+NumMFs=3
+MF1='negativo':'gaussmf',[0.142017743654718 -1.0327868852459]
+MF2='cero':'gaussmf',[0.0932861649496676 -0.00491803278688563]
+MF3='positivo':'gaussmf',[0.167079698417315 0.973770491803279]
+
+[Rules]
+1, 1 (1) : 1
+2, 2 (1) : 1
+3, 3 (1) : 1
