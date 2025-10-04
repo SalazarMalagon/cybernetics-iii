@@ -1,0 +1,58 @@
+clear; clc
+
+%Se crea el sistema mamdani
+fis = mamfis(Name="Lavadora");
+
+%Creamos las entradas de Suciedad y Carga
+fis = addInput(fis, [0 10], Name="Suciedad");
+fis = addInput(fis, [0 10], Name="Carga");
+ 
+fis = addMF(fis, 'Suciedad', 'gaussmf', [1.5 0], Name='Poca');
+fis = addMF(fis, 'Suciedad', 'gaussmf', [1.5 5], Name='Media');
+fis = addMF(fis, 'Suciedad', 'gaussmf', [1.5 10], Name='Mucha');
+
+fis = addMF(fis, 'Carga', 'trimf', [0 0 5], Name='Baja');
+fis = addMF(fis, 'Carga', 'trimf', [3 5 7], Name='Media');
+fis = addMF(fis, 'Carga', 'trimf', [5 10 10], Name='Alta');
+
+fis = addOutput(fis, [00 60], Name='Tiempo_Lavado');
+
+fis = addMF(fis, 'Tiempo_Lavado', 'trimf', [0 10 15], Name='Corto');
+fis = addMF(fis, 'Tiempo_Lavado', 'trimf', [10 25 40], Name='Medio');
+fis = addMF(fis, 'Tiempo_Lavado', 'trimf', [30 45 60], Name='Largo');
+
+fis = addOutput(fis, [10 100], Name='Detergente');
+
+fis = addMF(fis, 'Detergente', 'trimf', [10 30 50], Name='Poco');
+fis = addMF(fis, 'Detergente', 'trimf', [40 65 90], Name='Normal');
+fis = addMF(fis, 'Detergente', 'trimf', [70 100 100], Name='Mucho');
+
+rulelist = [ 
+    1 1 1 1 1 1; % IF Suciedad es Poca AND Carga es Baja THEN Tiempo es Corto AND Detergente es Poco
+    3 3 3 3 1 1; % IF Suciedad es Mucha AND Carga es Alta THEN Tiempo es Largo AND Detergente es Mucho
+    2 2 2 2 1 1; % IF Suciedad es Media AND Carga es Media THEN Tiempo es Medio AND Detergente es Normal
+    1 3 2 2 1 1; % IF Suciedad es Poca AND Carga es Alta THEN Tiempo es Medio AND Detergente es Normal (más agua requiere más tiempo)
+    3 1 2 2 1 1; % IF Suciedad es Mucha AND Carga es Baja THEN Tiempo es Medio AND Detergente es Normal (más suciedad compensa la carga)
+    2 3 3 3 1 1; % IF Suciedad es Media AND Carga es Alta THEN Tiempo es Largo AND Detergente es Mucho
+];
+
+fis = addRule(fis, rulelist);
+
+Entradas_Prueba = [0 0]; 
+Resultados = evalfis(fis, Entradas_Prueba);
+
+% 12. Mostrar los resultados
+Tiempo_Final = Resultados(1);
+Detergente_Final = Resultados(2);
+
+disp('------------------------------------------');
+disp(['Para: Suciedad=', num2str(Entradas_Prueba(1)), ', Carga=', num2str(Entradas_Prueba(2))]);
+disp(['Tiempo de Lavado Decidido: ', num2str(Tiempo_Final), ' minutos']);
+disp(['Dosis de Detergente Decidida: ', num2str(Detergente_Final), ' ml']);
+disp('------------------------------------------');
+
+gensurf(fis)
+
+figure;
+opt = gensurfOptions('OutputIndex',2);
+gensurf(fis,opt)
