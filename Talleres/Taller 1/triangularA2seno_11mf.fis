@@ -1,0 +1,57 @@
+[System]
+Name='triangularA2seno_11mf'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=11
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='X'
+Range=[-0.5 0.5]
+NumMFs=11
+MF1='in1':'gaussmf',[0.05 -0.5]
+MF2='in2':'gaussmf',[0.05 -0.4]
+MF3='in3':'gaussmf',[0.05 -0.3]
+MF4='in4':'gaussmf',[0.05 -0.2]
+MF5='in5':'gaussmf',[0.05 -0.1]
+MF6='in6':'gaussmf',[0.05 0]
+MF7='in7':'gaussmf',[0.05 0.1]
+MF8='in8':'gaussmf',[0.05 0.2]
+MF9='in9':'gaussmf',[0.05 0.3]
+MF10='in10':'gaussmf',[0.05 0.4]
+MF11='in11':'gaussmf',[0.05 0.5]
+
+[Output1]
+Name='Y'
+Range=[-0.5 0.5]
+NumMFs=11
+MF1='out1':'gaussmf',[0.05 -0.5]
+MF2='out2':'gaussmf',[0.05 -0.475528258147577]
+MF3='out3':'gaussmf',[0.05 -0.404508497187474]
+MF4='out4':'gaussmf',[0.05 -0.293892626146237]
+MF5='out5':'gaussmf',[0.05 -0.154508497187474]
+MF6='out6':'gaussmf',[0.05 0]
+MF7='out7':'gaussmf',[0.05 0.154508497187474]
+MF8='out8':'gaussmf',[0.05 0.293892626146237]
+MF9='out9':'gaussmf',[0.05 0.404508497187474]
+MF10='out10':'gaussmf',[0.05 0.475528258147577]
+MF11='out11':'gaussmf',[0.05 0.5]
+
+[Rules]
+1, 1 (1) : 1
+2, 2 (1) : 1
+3, 3 (1) : 1
+4, 4 (1) : 1
+5, 5 (1) : 1
+6, 6 (1) : 1
+7, 7 (1) : 1
+8, 8 (1) : 1
+9, 9 (1) : 1
+10, 10 (1) : 1
+11, 11 (1) : 1
