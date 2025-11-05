@@ -13,7 +13,7 @@ ode_options = odeset('RelTol',1e-10, 'AbsTol',1e-11);
 input=[]; output=[];
 for j=1:100  % training trajectories
     % Corrected: Generate 2D initial conditions instead of 3D
-    x0=2*(rand(2,1)-0.5);
+    x0=3*(rand(2,1)-0.5);
     [t,y] = ode45(Lorenz,t,x0);
     input=[input; y(1:end-1,:)];
     output=[output; y(2:end,:)];
@@ -24,7 +24,7 @@ end
 grid on
 
 %%
-net = feedforwardnet([5 5 5]);
+net = feedforwardnet([10 10 10 10]);
 net.layers{1}.transferFcn = 'tansig';
 net.layers{2}.transferFcn = 'tansig';
 net.layers{3}.transferFcn = 'purelin';
@@ -81,4 +81,4 @@ subplot(3,2,1), set(gca,'Fontsize',[15],'Xlim',[0 8])
 subplot(3,2,2), set(gca,'Fontsize',[15],'Xlim',[0 8])
 subplot(3,2,3), set(gca,'Fontsize',[15],'Xlim',[0 8])
 subplot(3,2,4), set(gca,'Fontsize',[15],'Xlim',[0 8])
-legend('Lorenz','NN')
+legend('Duffing Attractor','NN')
