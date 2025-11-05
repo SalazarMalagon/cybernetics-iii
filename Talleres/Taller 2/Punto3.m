@@ -25,15 +25,15 @@ grid on
 
 %%
 net = feedforwardnet([5 5 5]);
-net.layers{1}.transferFcn = 'logsig';
-net.layers{2}.transferFcn = 'radbas';
+net.layers{1}.transferFcn = 'tansig';
+net.layers{2}.transferFcn = 'tansig';
 net.layers{3}.transferFcn = 'purelin';
 net = train(net,input.',output.');
 
 %%
 figure(2)
 % Corrected: Generate 2D initial conditions
-x0=20*(rand(2,1)-0.5);
+x0=1*(rand(2,1)-0.5);
 [t,y] = ode45(Lorenz,t,x0);
 % Corrected: Plot 2D trajectory
 plot(y(:,1),y(:,2)), hold on
@@ -55,7 +55,7 @@ subplot(3,2,3), plot(t,y(:,2),t,ynn(:,2),'Linewidth',[2])
 
 figure(2)
 % Corrected: Generate 2D initial conditions
-x0=20*(rand(2,1)-0.5);
+x0=1*(rand(2,1)-0.5);
 [t,y] = ode45(Lorenz,t,x0);
 % Corrected: Plot 2D trajectory
 plot(y(:,1),y(:,2)), hold on

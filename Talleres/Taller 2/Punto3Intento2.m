@@ -7,7 +7,8 @@ dt=0.01; T=8; t=0:dt:T;
 b=0.3; a=0.35; w=1;
 
 % Ecuación diferencial
-sistema = @(t,x)([ x(2); x(1)-(x(1)^3)-(a*x(2))+(b*cos(w*t))]);              
+sistema = @(t,x)([ x(2); ...
+                   x(1)-(x(1)^3)-(a*x(2))+(b*cos(w*t))]);              
 ode_options = odeset('RelTol',1e-10, 'AbsTol',1e-11);
 
 % Generar datos de entrenamiento
@@ -45,7 +46,7 @@ colors = {'b-', 'r--', 'g-.', 'm:'};
 errors = [];
 
 for test_case = 1:4
-    x0 = 3*(rand(2,1)-0.5);
+    x0 = 0.5*(rand(2,1)-0.5);
     [~,y_real] = ode45(sistema,t,x0,ode_options);
     
     % Predicción con red neuronal
@@ -76,7 +77,7 @@ end
 
 % Análisis temporal
 figure(3)
-x0 = 2*(rand(2,1)-0.5);
+x0 = 0.5*(rand(2,1)-0.5);
 [~,y_real] = ode45(sistema,t,x0,ode_options);
 
 y_pred = zeros(length(t),2);
