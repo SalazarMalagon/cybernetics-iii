@@ -8,7 +8,7 @@ y = x;
 %Evaluación de todos los datos
 for j=1:length(x)
 for i=1:length(y)
-z(i,j)=PassinoE([x(j);y(i)]);
+z(i,j)=rosenbrock([x(j);y(i)]);
 end
 end
 %Figura de la función objetivo en 2D
@@ -16,7 +16,7 @@ figure
 surf(x,y,z);
 colormap(jet)
 xlabel('x');ylabel('y');zlabel('J');
-title('Funcion objetivo');
+title('Funcion de Rosenbrock 2D');
 %Cantidad de variables
 NV = 2;
 %
@@ -26,5 +26,4 @@ optionsga = optimoptions('ga', ...
 'MaxGenerations', 200, ...
 'PlotFcn', {@gaplotbestf, @gaplotbestindiv, @gaplotexpectation, @gaplotstopping});
 %Función que implementa la optimización con AG
-y = ga(@PassinoE,NV,optionsga)
-
+y = ga(@rosenbrock,NV,optionsga)
