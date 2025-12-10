@@ -27,7 +27,7 @@ num_states = size(Ad, 1); num_outputs = size(Cd, 1);
 % 2. SIMULACIÓN MONTE CARLO (Generación de Datos)
 % =================================
 disp('2. Generando 20 simulaciones con baches aleatorios.');
-num_simulaciones = 20; T_sim = 20.0; N = floor(T_sim / Ts); t = (0:N-1)' * Ts;
+num_simulaciones = 2 0; T_sim = 20.0; N = floor(T_sim / Ts); t = (0:N-1)' * Ts;
 u_data_all = zeros(num_simulaciones, N); y_all_simulations = zeros(num_simulaciones, N, num_outputs); 
 bump_height_min = 0.05; bump_height_max = 0.2; bump_duration_min = 1.0; bump_duration_max = 3.0; t_bump_start = 2.0;
 
